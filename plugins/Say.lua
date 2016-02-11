@@ -12,9 +12,9 @@ end
 
 return {
   description = "Simplest plugin ever!",
-  usage = "!echo [whatever]: echoes the msg",
+  usage = "say [whatever]: echoes the msg",
   patterns = {
-    "^!echo +(.+)$"
+    "^/say +(.+)$"
   }, 
   run = run 
 }
