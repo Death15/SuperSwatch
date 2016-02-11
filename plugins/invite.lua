@@ -18,29 +18,29 @@ local function run(msg, matches)
   end
   
   -- User submitted an id
-  if matches[1] == "id" then
+  if matches[1] == "user" then
     user = 'user#id'..user
   end
 
   -- The message must come from a chat group
-  if msg.to.type == 'chat' then
-    local chat = 'chat#id'..msg.to.id
-    chat_add_user(chat, user, callback, false)
-    return "Add: "..user.." to "..chat
+  if msg.to.type == 'channel' then
+    local chat = 'channel#id'..msg.to.id
+    channel_invite_user(channel, user, callback, false)
+    return "Added "..user.." to "..chat
   else 
-    return 'This isnt a chat group!'
+    return 'This isnt a  supergroup!'
   end
 
 end
 
 return {
-  description = "Invite other user to the chat group", 
+  description = "Invite other user to the supergroup", 
   usage = {
     "!invite name [user_name]", 
     "!invite id [user_id]" },
   patterns = {
     "^!invite (name) (.*)$",
-    "^!invite (id) (%d+)$"
+    "^!invite (user) (%d+)$"
   }, 
   run = run 
 }
