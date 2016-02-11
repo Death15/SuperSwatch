@@ -1,7 +1,7 @@
-local function kick_user(user_id, chat_id)
-  local chat = 'chat#id'..chat_id
+local function kick_user(user_id, channel_id)
+  local channel = 'channel#id'..channel_id
   local user = 'user#id'..user_id
-  chat_del_user(chat, user, function (data, success, result)
+  channel_kick_user(chat, user, function (data, success, result)
     if success ~= 1 then
       send_msg(data.chat, 'Error while kicking user', ok_cb, nil)
     end
