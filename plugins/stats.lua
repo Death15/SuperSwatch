@@ -139,11 +139,11 @@ local function run(msg, matches)
   if matches[1]:lower() == "stats" then
 
     if not matches[2] then
-      if msg.to.type == 'chat' then
-        local chat_id = msg.to.id
-        return chat_stats(chat_id)
+      if msg.to.type == 'channel' then
+        local channel_id = msg.to.id
+        return chat_stats(channel_id)
       else
-        return 'Stats works only on chats'
+        return 'Stats works only on supergroup'
       end
     end
 
@@ -173,9 +173,9 @@ return {
     "!stats bot: Shows bot stats (sudo users)"
   },
   patterns = {
-    "^!([Ss]tats)$",
-    "^!([Ss]tats) (chat) (%d+)",
-    "^!([Ss]tats) (bot)"
+    "^[!/]([Ss]tats)$",
+    "^[!/]([Ss]tats) (chat) (%d+)",
+    "^[!/]([Ss]tats) (bot)"
     }, 
   run = run,
   pre_process = pre_process
