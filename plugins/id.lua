@@ -48,15 +48,15 @@ local function run(msg, matches)
   local receiver = get_receiver(msg)
 
   -- Id of the user and info about group / channel
-  if matches[1] == "!id" then
+  if matches[1] == "id" then
     if msg.to.type == 'channel' then
-      return ('Channel ID: %s\nUser ID: %s'):format(msg.to.id, msg.from.id)
+      return ('Supergroup ID: %s\nYour ID: %s'):format(msg.to.id, msg.from.id)
     end
     if msg.to.type == 'chat' then
-      return ('Chat ID: %s\nUser ID: %s'):format(msg.to.id, msg.from.id)
+      return ('Group ID: %s\nYuor ID: %s'):format(msg.to.id, msg.from.id)
     end
     return ('User ID: %s'):format(msg.from.id)
-  elseif matches[1] == 'chat' or matches[1] == 'channel' then
+  elseif matches[1] == 'chat' or matches[1] == 'supergroup' then
     local type = matches[1]
     local chanId = matches[2]
     -- !ids? (chat) (%d+)
@@ -103,7 +103,7 @@ local function run(msg, matches)
       end, {receiver=chan, nick=nick})
     elseif msg.to.type == 'channel' then
       -- TODO
-      return 'Channels currently not supported'
+      return 'Supergroups currently not supported'
     else
       return 'You are not in a group'
     end
@@ -149,7 +149,7 @@ local function run(msg, matches)
       end, {receiver=chan, text=text})
     elseif msg.to.type == 'channel' then
       -- TODO
-      return 'Channels currently not supported'
+      return 'Supergroups currently not supported'
     else
       return 'You are not in a group'
     end
@@ -171,8 +171,8 @@ return {
     "^!id$",
     "^!ids? (chat) (%d+)$",
     "^!ids? (chat)$",
-    "^!ids (channel)$",
-    "^!ids (channel) (%d+)$",
+    "^!ids (supergroup)$",
+    "^!ids (supergroup) (%d+)$",
     "^!id (member) (@)(.+)",
     "^!id (members) (name) (.+)"
   },
