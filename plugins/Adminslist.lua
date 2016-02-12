@@ -1,4 +1,4 @@
-local function channel_get_admins(admins, channel_id)
+local function channel_get_admins(admins, peer_id)
 local channel = msg.to.id
 local chan = ("%s#id%s"):format(msg.to.type, msg.to.id)
 if msg.to.type == 'channel' then
