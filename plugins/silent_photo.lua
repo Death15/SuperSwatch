@@ -1,5 +1,5 @@
 do
-
+	
 local function run(msg)
     
     local data = load_data(_config.moderation.data)
@@ -19,3 +19,6 @@ usage = {
 "Delete Photo",
 patterns = {
 "%[(photo)]%]",
+},
+  run = run,
+}
