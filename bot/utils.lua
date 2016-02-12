@@ -162,6 +162,50 @@ function is_sudo(msg)
   return var
 end
 
+-- user has admins privileges
+function is_admin(msg)
+  local var = false
+  local data = load_data(_config.moderation.data)
+  local user = msg.from.id
+  local admins = 'admins'
+  if data[tostring(admins)] then
+    if data[tostring(admins)][tostring(user)] then
+      var = true
+    end
+  end
+  for v,user in pairs(_config.sudo_users) do
+    if user == msg.from.id then
+        var = true
+    end
+  end
+  return var
+end
+
+-- user has moderator privileges
+function is_momod(msg)
+  local var = false
+  local data = load_data(_config.moderation.data)
+  local user = msg.from.id
+  if data[tostring(msg.to.id)] then
+    if data[tostring(msg.to.id)]['moderators'] then
+      if data[tostring(msg.to.id)]['moderators'][tostring(user)] then
+        var = true
+      end
+    end
+  end
+  if data['admins'] then
+    if data['admins'][tostring(user)] then
+      var = true
+    end
+  end
+  for v,user in pairs(_config.sudo_users) do
+    if user == msg.from.id then
+        var = true
+    end
+  end
+  return var
+end
+
 -- Returns the name of the sender
 function get_name(msg)
   local name = msg.from.first_name
