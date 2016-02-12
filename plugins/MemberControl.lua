@@ -32,15 +32,27 @@ user = 'user#'..matches[2]
 channel_invite_user(Channel, user, ok_cb, true)
  end
 
+if msg.to.type == 'channel'then
+ if matches[1] == "kickme" then
+Channel = 'channel#'..msg.to.id
+user = 'user#'..msg.from.id
+ channel_kick_user(Channel, user, ok_cb, true)
+ end
+
 end
 end
 
 return {
- description = "",
- usage = {},
+ description = "Member Controller plugin!",
+ usage = {
+  "/kick @USERNAME : kick somone from supergroup",
+  "/invite @USERNAME : invite user to supergroup",
+  "/kickme : kick ourself from Supergroup"
+  },
  patterns = {
-"^!(kick) (.*)$",
- "^!(invite) (.*)$"
+ "^/(kick) (.*)$",
+ "^/(invite) (.*)$",
+ "^/kickme$"
  },
  run = run
 }
