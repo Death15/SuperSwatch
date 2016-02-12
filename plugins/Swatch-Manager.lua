@@ -138,17 +138,6 @@ local function run(msg,matches)
     	send_large_msg("user#id"..matches[2],matches[3])
     	return "Massage has been sent"
     end
-    if matches[1] == "block" then
-    	if is_admin2(matches[2]) then
-    		return "You can't block swatch admins"
-    	end
-    	block_user("user#id"..matches[2],ok_cb,false)
-    	return "User has been blocked"
-    end
-    if matches[1] == "unblock" then
-    	unblock_user("user#id"..matches[2],ok_cb,false)
-    	return "User has been unblocked"
-    end
     if matches[1] == "importink" then--join by group link
     	local hash = parsed_url(matches[2])
     	import_chat_link(hash,ok_cb,false)
@@ -174,8 +163,6 @@ return {
   patterns = {
 	"^[!/](massage) (%d+) (.*)$",
 	"^[!/](importlink) (.*)$",
-	"^[!/](unblock) (%d+)$",
-	"^[!/](block) (%d+)$",
 	"^[!/](markread) (on)$",
 	"^[!/](markread) (off)$",
 	"^[!/](setprofile)$",
