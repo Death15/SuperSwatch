@@ -148,8 +148,9 @@ if msg.to.type == 'channel' then
     "/creategroup (.*)$",
     "/setabout (.*)$",
     "/setrules (.*)$",
-    "/gp (+) (.*)$",
-    "/gp (?)$",
+    "/supergroup(+) (.*)$",
+    "/supergroup (-) (.*)$",
+    "/supergroup (?)$",
     "^/adminslist$"
   },
   run = run
