@@ -5,20 +5,6 @@ if not is_sudo(msg) then
  return nil
  end
 
- if msg.to.type == 'chat'then
- if matches[1] == "kick" then
- chat = 'chat#'..msg.to.id
- user = 'user#'..matches[2]
- chat_del_user(chat, user, callback, false)
- end
-
- if matches[1] == "invite" then
- chat = 'chat#'..msg.to.id
- user = 'user#'..matches[2]
-chat_add_user(chat, user, callback, false)
- end
- end
-
  if msg.to.type == 'channel'then
  if matches[1] == "kick" then
 Channel = 'channel#'..msg.to.id
@@ -37,9 +23,29 @@ if msg.to.type == 'channel'then
 Channel = 'channel#'..msg.to.id
 user = 'user#'..msg.from.id
  channel_kick_user(Channel, user, ok_cb, true)
- end
-
 end
+
+if msg.to.type == 'channel' then
+ if matches[1] == "silent" and matches[2] == "user" then
+ Channel = 'channel#'..msg.to.id
+ user = 'user#'..matches[3]
+  local silent_hash = 'user_silent:'..channel_id..':'..user_id
+    local is_silented_offender = redis:get(silent_hash)
+     if is_silented_offender then
+  delete_msg(msg.id, ok_cb, true)
+  redis:set(silent_hash, true)
+end
+if msg.to.type == 'channel' then
+ if matches[1] == "unsilent" and matches[2] == "user" then
+ Channel = 'channel#'..msg.to.id
+ user = 'user#'..matches[3]
+  local silent_hash = 'user_silent:'..channel_id..':'..user_id
+    local is_silented_offender = redis:get(silent_hash)
+     if is_silented_offender then
+  delete_msg(msg.id, ok_cb, true)
+  redis:del(silent_hash)
+  
+  end
 end
 
 return {
@@ -47,12 +53,16 @@ return {
  usage = {
   "/kick @USERNAME : kick somone from supergroup",
   "/invite @USERNAME : invite user to supergroup",
-  "/kickme : kick ourself from Supergroup"
+  "/kickme : kick ourself from Supergroup",
+  "/silent user @USERNAME : Silent user in supergroup",
+  "/unsilent user @USERNAME : Un silent User In SuperGroup"
   },
  patterns = {
  "^/(kick) (.*)$",
  "^/(invite) (.*)$",
- "^/kickme$"
+ "^/kickme$",
+ "^/silent (user) (.*)$",
+ "^/(unsilent) (user) (.*)$"
  },
  run = run
 }
