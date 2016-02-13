@@ -3,7 +3,7 @@ local function run (msg, matches)
          return
      end
      
-          local hash_fa = 'fa:enabled:'..msg.to.id
+          local hash_per = 'persian:enabled:'..msg.to.id
   local faenabled = redis:get(hash_fa)
      local user = matches[2]
       local chat = msg.to.id
