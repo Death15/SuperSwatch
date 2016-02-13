@@ -162,6 +162,20 @@ function is_sudo(msg)
   return var
 end
 
+--Check if user is the leader of that group or not
+function is_leader(msg)
+  local var = false
+  local data = load_data(_config.moderation.data)
+  local user = msg.from.id
+  
+  if data[tostring(msg.to.id)] then
+    if data[tostring(msg.to.id)]['addleader'] then
+      if data[tostring(msg.to.id)]['adddleader'] == tostring(user) then
+        var = true
+      end
+    end
+  end
+
 -- user has admins privileges
 function is_admin(msg)
   local var = false
