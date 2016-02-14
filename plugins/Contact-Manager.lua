@@ -67,5 +67,56 @@ local function get_dialog_list_callback(cb_extra, success, result)
   file:flush()
   file:close()
   send_document("user#id"..cb_extra.target,"dialoglist.json", ok_cb, false)--json format
+  end
+
+ local function run(msg,matches)
+    local data = load_data(_config.moderation.data)
+    local receiver = get_receiver(msg)
+    local group = msg.to.id
+    if not is_admin(msg) then
+    	return
+    end
+    
+    if matches[1] "addcontact" then
+      add_contact(matches[2], matches[3], matches[4],ok_cb,false)
+     return "Added "..matches[2].." to contact list"
+   end
+   
+   if matches[1] "recontact" then
+     rename_conctact(matches[2],matches[3],matches[4],ok_cb,false)
+     return "Contact "..matches[2].." Renamed"
+   end
+   
+   if matches[1] "delcontact" then
+     del_contact("user#id"..matches[2],ok_cb,false)
+      return "User "..matches[2].." removed from Swatch Contact's"
+   
+   if matches[1] "contactlist" then
+     get_contact_list(get_contact_list_callback, {target = msg.from.id})
+       return "Sended Contactlist in your private\nPlease Check Your PV"
+     end
+     
+     if matches[1] == "dialoglist" then
+      get_dialog_list(get_dialog_list_callback, {target = msg.from.id})
+      return "Sended dialoglist to Yuor Private\nPlease Check your PV"
+    end
+    
+  if matches[1] == "res" then
+    user_info("user#id"..matches[2],user_info_callback,{msg=msg})
+  end
+  return
 end
-end
+return {
+  patterns = {
+    "^/(addcontact) (.*) (.*) (.*)$",
+    "^/(recontact) (.*) (.*) (.*)$",
+    "^/(delcontact) (%d+)$",
+    "^/(contactlist)$",
+    "^/(dialoglist)$",
+    "^/(res) (%d+)$"
+    },
+  run = run,
+}
+--BY @ArashSWATCH
+--I Think Your TG Will Crash But Plugin It's fix
+   
