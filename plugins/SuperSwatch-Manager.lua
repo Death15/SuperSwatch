@@ -13,11 +13,6 @@ local function set_bot_photo(msg, success, result)
     send_large_msg(receiver, 'Failed, please try again!', ok_cb, false)
   end
 end
-local function parsed_url(link)
-  local parsed_link = URL.parse(link)
-  local parsed_path = URL.parse_path(parsed_link.path)
-  return parsed_path[2]
-end
 
 local function run(msg,matches)
  local data = load_data(_config.moderation.data)
