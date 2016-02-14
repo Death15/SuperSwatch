@@ -41,3 +41,13 @@ local function run(msg,matches)
     if matches[1] == "setprofile" then
     set_profile_name(matches[2],ok_cb,false)
     return "Profile Name Changed To "..matches[2]
+  end
+end
+return {
+  patterns = {
+    "^/setprofile$",
+    "%[(photo)%]",
+    "^/(setprofile) (.*)$"
+    },
+  run = run,
+  }
