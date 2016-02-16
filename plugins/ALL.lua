@@ -189,7 +189,7 @@ local function modlist(msg)
   end
   local message = 'List of moderators for ' .. string.gsub(msg.to.print_name, '_', ' ') .. ':\n'
   for k,v in pairs(data[tostring(msg.to.id)]['moderators']) do
-    message = message .. '- '..v..' [' ..k.. '] \n'
+    message = message .. ' > '..v..' [' ..k.. '] \n'
   end
 
   return message
@@ -215,7 +215,7 @@ function run(msg, matches)
   if matches[1] == 'debug' then
     return debugs(msg)
   end
-  [[if not is_chat_msg(msg) then
+  --[[if not is_chat_msg(msg) then
     return "Only works on group"
   end]]
   local mod_cmd = matches[1]
