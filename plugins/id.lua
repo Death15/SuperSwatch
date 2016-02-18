@@ -76,7 +76,7 @@ local function run(msg, matches)
       if msg.to.type == 'chat' then
         chat_info(chan, returnids, {receiver=receiver})
       else
-        return "You are not in a group."
+        return ""
       end
     end
   elseif matches[1] == "member" and matches[2] == "@" then    
@@ -149,9 +149,9 @@ local function run(msg, matches)
       end, {receiver=chan, text=text})
     elseif msg.to.type == 'channel' then
       -- TODO
-      return 'Supergroups currently not supported'
+      return 
     else
-      return 'You are not in a group'
+      return 
     end
   end
 end
