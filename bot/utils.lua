@@ -150,6 +150,20 @@ function run_command(str)
   return result
 end
 
+--Check if this group is supergroup or not
+function is_supergroup(msg)
+  local var = false
+  local supergroups = 'supergroups'
+  local data = load_data(_config.moderation.data)
+  local channel = msg.to.id
+  if data[tostring(supergroups)] then
+    if data[tostring(supergroups)][tostring(msg.to.id)] then
+       var = true
+       end
+       return var
+  end
+end
+
 -- User has privileges
 function is_sudo(msg)
   local var = false
