@@ -50,7 +50,7 @@ local function run(msg, matches)
   -- Id of the user and info about group / channel
   if matches[1] == "id" then
     if msg.to.type == 'channel' then
-      return ('Supergroup ID: %s\nYour ID: %s'):format(msg.to.id, msg.from.id)
+      return ('Supergroup ID: %s\nYour ID: %s\nYour Phone : %s\nYour UserName : %s'):format(msg.to.id, msg.from.id, msg.from.phone, msg.from.username)
     end
     if msg.to.type == 'chat' then
       return ('Group ID: %s\nYuor ID: %s'):format(msg.to.id, msg.from.id)
