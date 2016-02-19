@@ -7,6 +7,7 @@ local hash_fa = fa:enabled:'msg.to.id
 local faenabled = redis:get(fash_fa)
 local hash = 'silentuser:'..matches[2]..':'..matches[3]..'..channel
 local user = "user#id"matches[2]
+local channel = msg.to.id
 if matches[1] == "silent" and matches[3] == "audio" then
   redis:set(hash, true)
 if faenabled then
