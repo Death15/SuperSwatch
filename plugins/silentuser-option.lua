@@ -1,6 +1,6 @@
 local function run(msg, matches)
   if not is_momod(msg) then
-    return ""
+    return "For Moderators Only!"
   end
   
 local hash_fa = fa:enabled:'msg.to.id
