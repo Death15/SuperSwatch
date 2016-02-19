@@ -24,11 +24,17 @@ if matches[1] "unsilent" and matches[3] == "audio" then
   else
     text2 = "User "..matches[2].." has been unmuted from sending audio"
   end
+  
+  local enabled2 = redis:get(hash)
+  if msg.to.type == 'channel' and not is_momod(msg) and enabled2 then
+    msgr = delete_msg(msg.id, ok_cb, false)
+    end
 end
 return {
   patterns = {
     "^/(silent) (%d+) (audio)$",
     "^/(unsilent) (%d+) (audio)$"
+    "%[(video)]%]"
     },
   run = run
   }
