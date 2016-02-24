@@ -1,3 +1,5 @@
+do
+
 local function run(msg, matches)
 if not is_momod(msg) then
 return "for MOderators Only"
